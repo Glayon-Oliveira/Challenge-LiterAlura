@@ -9,6 +9,8 @@ public class ConsumeGuntendexAPI {
 	
 	public ConsumeGuntendexAPI() {
 		
+		client = HttpClient.newHttpClient();
+		
 	}	
 
 }
