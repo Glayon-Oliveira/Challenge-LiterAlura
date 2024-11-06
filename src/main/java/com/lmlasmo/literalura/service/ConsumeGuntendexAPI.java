@@ -93,6 +93,7 @@ public class ConsumeGuntendexAPI {
 		
 		bookList = bookList.stream()
 			.filter(b -> b.toUpperCase().equals(title.toUpperCase()))
+			.distinct()
 			.collect(Collectors.toList);
 					
 		if(bookList.size()>0){
