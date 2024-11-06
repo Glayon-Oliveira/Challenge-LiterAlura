@@ -23,14 +23,14 @@ public class ConsumeGuntendexAPI {
 		
 	}	
 	
-	public List<BookDTO> requestBooks(String title) {
+	public List<BookDTO> requestSearch(String search) {
 		
 		List<BookDTO> bookList = new ArrayList<BookDTO>();
 		
 		try {
 			
 			HttpRequest request = HttpRequest.newBuilder()
-					.uri(new URI(String.join(this.API_HOST, "/books?search=", title)))
+					.uri(new URI(String.join(this.API_HOST, "/books?search=", search)))
 					.GET()
 					.build();
 			
@@ -87,6 +87,22 @@ public class ConsumeGuntendexAPI {
 		
 	}
 	
-	public BookDTO 
+	public BookDTO requestBookByTitle(String title){
+	
+		List<BookDTO> bookList = requestSearch(title);
+		
+		bookList = bookList.stream()
+			.filter(b -> b.toUpperCase().equals(title.toUpperCase()))
+			.collect(Collectors.toList);
+					
+		if(bookList.size()>0){
+		
+			return bookList.get(0);
+		
+		}else{
+			return null;			
+		}		
+	
+	}
 
 }
