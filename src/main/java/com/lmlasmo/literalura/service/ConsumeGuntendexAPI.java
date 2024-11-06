@@ -104,5 +104,48 @@ public class ConsumeGuntendexAPI {
 		}		
 	
 	}
+	
+	public AuthorDTO requestAuthorByName(String name){
+		
+		List<BookDTO> bookList = requestSearch(name);
+		
+		List<AuthorDTO> authorList = bookList.stream()
+					.flatMap(b -> b.getAuthors().stream())
+					.filter(a -> verifyAuthorName(a.getName(), name))
+					.distinct()
+					.collect(Collectors.toList);
+					
+		if(authorList.size()>0){
+			return authorList.get(0);
+		}else{
+			return null;
+		}
+		
+	}
+	
+	private boolean verifyAuthorName(String authorName, String name){
+	
+	
+		for(int cc = 0; cc<name.length()-1;){
+						
+			int nextSpaceIndex = name.indexOf(" ", cc);
+							
+			if (nextSpaceIndex == -1) {
+			       nextSpaceIndex = name.length();
+		        }
+							
+			String subname = name.substring(cc, nextSpaceIndex);
+							
+			if (authorName.contains(subname)) {
+			        return false;
+			}
+
+			cc = nextSpaceIndex;
+													
+		}
+						
+		return true;					
+	
+	}
 
 }
