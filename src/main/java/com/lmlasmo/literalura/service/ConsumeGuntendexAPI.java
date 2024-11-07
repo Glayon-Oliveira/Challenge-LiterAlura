@@ -1,6 +1,7 @@
 package com.lmlasmo.literalura.service;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -27,12 +28,14 @@ public class ConsumeGuntendexAPI {
 	
 	public List<BookDTO> requestSearch(String search) {
 		
-		List<BookDTO> bookList = new ArrayList<BookDTO>();
+		List<BookDTO> bookList = new ArrayList<BookDTO>();				
 		
 		try {
 			
+			search = URLEncoder.encode(search, "UTF-8");
+			
 			HttpRequest request = HttpRequest.newBuilder()
-					.uri(new URI(String.join(this.API_HOST, "/books?search=", search)))
+					.uri(new URI(String.join("", this.API_HOST, "books/?search=", search)))
 					.GET()
 					.build();
 			
