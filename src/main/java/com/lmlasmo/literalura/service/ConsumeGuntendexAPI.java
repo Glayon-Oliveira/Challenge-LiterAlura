@@ -7,8 +7,10 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.lmlasmo.literalura.dto.AuthorDTO;
 import com.lmlasmo.literalura.dto.BookDTO;
 import com.lmlasmo.literalura.dto.ResultDTO;
 
@@ -92,9 +94,9 @@ public class ConsumeGuntendexAPI {
 		List<BookDTO> bookList = requestSearch(title);
 		
 		bookList = bookList.stream()
-			.filter(b -> b.toUpperCase().equals(title.toUpperCase()))
+			.filter(b -> b.getTitle().toUpperCase().equals(title.toUpperCase()))
 			.distinct()
-			.collect(Collectors.toList);
+			.collect(Collectors.toList());
 					
 		if(bookList.size()>0){
 		
@@ -114,7 +116,7 @@ public class ConsumeGuntendexAPI {
 					.flatMap(b -> b.getAuthors().stream())
 					.filter(a -> verifyAuthorName(a.getName(), name))
 					.distinct()
-					.collect(Collectors.toList);
+					.collect(Collectors.toList());
 					
 		if(authorList.size()>0){
 			return authorList.get(0);
