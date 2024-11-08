@@ -51,7 +51,12 @@ public class Book {
 		
 		this.title = book.getTitle();
 		this.downloadCount = book.getDownloadCount();
-		this.languages = book.getLanguages();		
+		this.languages = book.getLanguages();	
+		
+		this.authors = book.getAuthors().stream()
+							.map(a -> new Author(a))
+							.collect(Collectors.toSet());
+					
 		
 	}
 
