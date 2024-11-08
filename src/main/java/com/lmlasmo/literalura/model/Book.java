@@ -1,13 +1,18 @@
 package com.lmlasmo.literalura.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -22,8 +27,13 @@ public class Book {
 	@Column(name = "title")
 	private String title;
 	
-	@Column(name = "languages")
-	private String languages;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(
+			name = "book_languages",
+			joinColumns = @JoinColumn(name = "book_id")
+			)
+	@Column(name = "language")
+	private List<String> languages;
 	
 	@Column(name = "download_count")
 	private long downloadCount;
@@ -49,11 +59,11 @@ public class Book {
 		this.title = title;
 	}
 
-	public String getLanguages() {
+	public List<String> getLanguages() {
 		return languages;
 	}
 
-	public void setLanguages(String languages) {
+	public void setLanguages(List<String> languages) {
 		this.languages = languages;
 	}
 
