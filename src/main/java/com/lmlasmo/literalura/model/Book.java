@@ -1,5 +1,6 @@
 package com.lmlasmo.literalura.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class Book {
 			joinColumns = @JoinColumn(name = "book_id")
 			)
 	@Column(name = "language")
-	private List<String> languages;
+	private List<String> languages = new ArrayList<String>();
 	
 	@Column(name = "download_count")
 	private long downloadCount;

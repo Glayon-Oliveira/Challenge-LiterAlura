@@ -1,5 +1,6 @@
 package com.lmlasmo.literalura.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.lmlasmo.literalura.dto.AuthorDTO;
@@ -36,7 +37,7 @@ public class Author {
 	@JoinTable(name = "book_author",
 			   joinColumns = @JoinColumn(name = "author_id"),
 			   inverseJoinColumns = @JoinColumn(name = "book_id"))
-	private Set<Book> books;
+	private Set<Book> books = new HashSet<Book>();
 	
 	public Author() {}
 	
