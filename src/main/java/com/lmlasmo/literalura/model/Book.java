@@ -3,6 +3,9 @@ package com.lmlasmo.literalura.model;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.lmlasmo.literalura.dto.BookDTO;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -42,6 +45,14 @@ public class Book {
 	private Set<Author> authors = new HashSet<Author>();
 	
 	public Book() {}
+	
+	public Book(BookDTO book) {
+		
+		this.title = book.getTitle();
+		this.downloadCount = book.getDownloadCount();
+		this.languages = book.getLanguages();		
+		
+	}
 
 	public long getId() {
 		return id;

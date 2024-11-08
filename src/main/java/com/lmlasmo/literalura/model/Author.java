@@ -2,6 +2,8 @@ package com.lmlasmo.literalura.model;
 
 import java.util.Set;
 
+import com.lmlasmo.literalura.dto.AuthorDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,6 +39,14 @@ public class Author {
 	private Set<Book> books;
 	
 	public Author() {}
+	
+	public Author(AuthorDTO dto) {
+		
+		this.name = dto.getName();
+		this.birthYear = dto.getBirthYear();
+		this.deathYear = dto.getDeathYear();
+		
+	}
 
 	public long getId() {
 		return id;
