@@ -29,7 +29,7 @@ public class Book {
 	private long downloadCount;
 	
 	@ManyToMany(mappedBy = "books")	
-	private Set<Authors> authors = new HashSet<Authors>();
+	private Set<Author> authors = new HashSet<Author>();
 	
 	public Book() {}
 

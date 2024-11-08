@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "authors")
-public class Authors {
+public class Author {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +36,6 @@ public class Authors {
 			   inverseJoinColumns = @JoinColumn(name = "book_id"))
 	private Set<Book> books;
 	
-	public Authors() {}
+	public Author() {}
 	
 }
