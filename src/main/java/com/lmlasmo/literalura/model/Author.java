@@ -28,10 +28,10 @@ public class Author {
 	private String name;
 	
 	@Column(name = "birth_year")
-	private int birthYear;
+	private Integer birthYear;
 	
 	@Column(name = "death_year")
-	private int deathYear;
+	private Integer deathYear;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "book_author",
@@ -65,19 +65,19 @@ public class Author {
 		this.name = name;
 	}
 
-	public int getBirthYear() {
+	public Integer getBirthYear() {
 		return birthYear;
 	}
 
-	public void setBirthYear(int birthYear) {
+	public void setBirthYear(Integer birthYear) {
 		this.birthYear = birthYear;
 	}
 
-	public int getDeathYear() {
+	public Integer getDeathYear() {
 		return deathYear;
 	}
 
-	public void setDeathYear(int deathYear) {
+	public void setDeathYear(Integer deathYear) {
 		this.deathYear = deathYear;
 	}
 
