@@ -8,10 +8,10 @@ public class AuthorDTO {
 	private String name;
 
 	@JsonProperty("birth_year")
-	private int birthYear;
+	private Integer birthYear;
 
 	@JsonProperty("death_year")
-	private int deathYear;
+	private Integer deathYear;
 
 	public String getName() {
 		return name;
@@ -21,19 +21,19 @@ public class AuthorDTO {
 		this.name = name;
 	}
 
-	public int getBirthYear() {
+	public Integer getBirthYear() {
 		return birthYear;
 	}
 
-	public void setBirthYear(int birthYear) {
+	public void setBirthYear(Integer birthYear) {
 		this.birthYear = birthYear;
 	}
 
-	public int getDeathYear() {
+	public Integer getDeathYear() {
 		return deathYear;
 	}
 
-	public void setDeathYear(int deathYear) {
+	public void setDeathYear(Integer deathYear) {
 		this.deathYear = deathYear;
 	}
 
