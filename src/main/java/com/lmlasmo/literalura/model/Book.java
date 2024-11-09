@@ -17,11 +17,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 public class Book {
 	
 	@Id
@@ -30,14 +31,12 @@ public class Book {
 	
 	@Column(name = "title")
 	private String title;
-	
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(
-			name = "book_languages",
-			joinColumns = @JoinColumn(name = "book_id")
-			)
-	@Column(name = "language")
-	private List<String> languages = new ArrayList<String>();
+		
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "language_book",
+			   joinColumns = @JoinColumn(name = "book_id"),
+			   inverseJoinColumns = @JoinColumn(name = "language_id"))
+	private Set<Language> languages = new HashSet<Language>();
 	
 	@Column(name = "download_count")
 	private long downloadCount;
@@ -50,13 +49,7 @@ public class Book {
 	public Book(BookDTO book) {
 		
 		this.title = book.getTitle();
-		this.downloadCount = book.getDownloadCount();
-		this.languages = book.getLanguages();	
-		
-		this.authors = book.getAuthors().stream()
-							.map(a -> new Author(a))
-							.collect(Collectors.toSet());
-					
+		this.downloadCount = book.getDownloadCount();									
 		
 	}
 
@@ -76,11 +69,11 @@ public class Book {
 		this.title = title;
 	}
 
-	public List<String> getLanguages() {
+	public Set<Language> getLanguages() {
 		return languages;
 	}
 
-	public void setLanguages(List<String> languages) {
+	public void setLanguages(Set<Language> languages) {
 		this.languages = languages;
 	}
 
