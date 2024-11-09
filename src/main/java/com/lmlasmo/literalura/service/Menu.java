@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lmlasmo.literalura.dto.BookDTO;
@@ -26,28 +27,30 @@ public class Menu {
 	private Register register;
 
 	String showAuthorModel = """
+			--
 			Name: %s
 			Ano de nascimento: %s
-			Ano de falecimento: %s
+			Ano de falecimento: %s			
 			""";
 
 	String showBookModel = """
+			--
 			Título: %s
 			Autor(es): %s
 			Language: %s
-			Número de Downloads: %s
+			Número de Downloads: %s			
 			""";
 
 	@Autowired
 	public Menu(Register register) {
 
-		this.api = new ConsumeGuntendexAPI();
-		this.register = register;
+		this.api = new ConsumeGuntendexAPI();		
 		this.scanner = new Scanner(System.in);
+		
+		this.register = register;
 
 	}
-
-	@Transactional
+		
 	public void showMenu() {
 
 		String options = """
@@ -122,7 +125,6 @@ public class Menu {
 
 	}
 
-	@Transactional
 	public void findBookOption() {
 
 		System.out.println("Por qual titulo deseja buscar?");
@@ -157,8 +159,7 @@ public class Menu {
 		}
 
 	}
-
-	@Transactional
+		
 	public void toListBooksOption() {
 
 		List<Book> bookList = register.getAllBooks();
@@ -177,8 +178,7 @@ public class Menu {
 		});
 
 	}
-
-	@Transactional
+	
 	public void toListAuthorsOption() {
 
 		List<Author> authors = register.getAllAuthors();
@@ -201,8 +201,7 @@ public class Menu {
 		});
 
 	}
-
-	@Transactional
+	
 	public void toListAuthorsLivingOption() {
 
 		System.out.println("Em qual ano deseja realizar a busca?");
@@ -210,6 +209,7 @@ public class Menu {
 		try {
 
 			int ano = scanner.nextInt();
+			scanner.nextLine();
 
 			int anoAtual = LocalDate.now().getYear();
 
@@ -249,8 +249,7 @@ public class Menu {
 		}
 
 	}
-
-	@Transactional
+	
 	public void toListBookByLanguageOption() {
 
 		String languageOptions = """
@@ -266,6 +265,7 @@ public class Menu {
 		try {
 
 			int lan = scanner.nextInt();
+			scanner.nextLine();
 
 			switch (lan) {
 
@@ -293,8 +293,7 @@ public class Menu {
 		}
 
 	}
-
-	@Transactional
+		
 	public void toListBookByLanguage(String lan) {
 
 		List<Book> bookList = register.getBookRepository().findByLanguagesLanguage(lan);
@@ -312,6 +311,6 @@ public class Menu {
 
 		});
 
-	}
+	}	
 
 }

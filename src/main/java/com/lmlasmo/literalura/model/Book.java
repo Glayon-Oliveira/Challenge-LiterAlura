@@ -41,7 +41,7 @@ public class Book {
 	@Column(name = "download_count")
 	private long downloadCount;
 	
-	@ManyToMany(mappedBy = "books")	
+	@ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)	
 	private Set<Author> authors = new HashSet<Author>();
 	
 	public Book() {}

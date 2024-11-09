@@ -23,7 +23,7 @@ public class Language {
 	@Column(name = "language", unique = true)
 	private String language;
 
-	@ManyToMany(mappedBy = "languages")
+	@ManyToMany(mappedBy = "languages", fetch = FetchType.EAGER)
 	private Set<Book> books = new HashSet<Book>();
 
 	public Language() {

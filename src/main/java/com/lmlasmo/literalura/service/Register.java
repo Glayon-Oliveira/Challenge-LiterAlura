@@ -20,6 +20,7 @@ import com.lmlasmo.literalura.repository.BookRepository;
 import com.lmlasmo.literalura.repository.LanguageRepository;
 
 @Service
+@Transactional
 public class Register {
 	
 	private BookRepository bookRepository;
@@ -34,8 +35,7 @@ public class Register {
 		this.languageRepository = languageRepository;		
 
 	}
-	
-	@Transactional
+		
 	public Book registeBook(BookDTO dto) {
 		
 		Optional<Book> bookRegisted = bookRepository.findByTitle(dto.getTitle());
@@ -55,7 +55,6 @@ public class Register {
 		
 	}
 	
-	@Transactional
 	public Set<Language> registerLanguage(BookDTO dto) {				
 		
 		Set<Language> languages = dto.getLanguages().stream()							  
@@ -65,8 +64,7 @@ public class Register {
 		return languages;
 		
 	}
-	
-	@Transactional
+		
 	public Language registerLanguage(String language) {				
 		
 		Language languageP = verifyNewLanguage(language);
@@ -75,8 +73,7 @@ public class Register {
 		return languageP;
 		
 	}
-	
-	@Transactional
+		
 	public Set<Author> registerAuthor(BookDTO dto) {
 		
 		Set<Author> authors = dto.getAuthors()
@@ -87,8 +84,7 @@ public class Register {
 		return authors;
 		
 	}
-	
-	@Transactional
+		
 	public Author registerAuthor(AuthorDTO dto) {
 		
 		Author author = verifyNewAuthor(dto);
@@ -119,28 +115,23 @@ public class Register {
 		return new Author(dto);
 		
 	}
-	
-	@Transactional
+		
 	public List<Book> getAllBooks(){
 		return bookRepository.findAll();
 	}
-	
-	@Transactional
+		
 	public List<Author> getAllAuthors(){
 		return authorRepository.findAll();
 	}
-
-	@Transactional
+	
 	public BookRepository getBookRepository() {
 		return bookRepository;
 	}
-
-	@Transactional
+	
 	public AuthorRepository getAuthorRepository() {
 		return authorRepository;
 	}
-
-	@Transactional
+	
 	public LanguageRepository getLanguageRepository() {
 		return languageRepository;
 	}	
