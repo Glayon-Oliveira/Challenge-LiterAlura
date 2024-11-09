@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lmlasmo.literalura.dto.BookDTO;
 import com.lmlasmo.literalura.model.Author;
@@ -46,6 +47,7 @@ public class Menu {
 
 	}
 
+	@Transactional
 	public void showMenu() {
 
 		String options = """
@@ -120,7 +122,8 @@ public class Menu {
 
 	}
 
-	private void findBookOption() {
+	@Transactional
+	public void findBookOption() {
 
 		System.out.println("Por qual titulo deseja buscar?");
 
@@ -155,7 +158,8 @@ public class Menu {
 
 	}
 
-	private void toListBooksOption() {
+	@Transactional
+	public void toListBooksOption() {
 
 		List<Book> bookList = register.getAllBooks();
 
@@ -174,7 +178,8 @@ public class Menu {
 
 	}
 
-	private void toListAuthorsOption() {
+	@Transactional
+	public void toListAuthorsOption() {
 
 		List<Author> authors = register.getAllAuthors();
 
@@ -197,7 +202,8 @@ public class Menu {
 
 	}
 
-	private void toListAuthorsLivingOption() {
+	@Transactional
+	public void toListAuthorsLivingOption() {
 
 		System.out.println("Em qual ano deseja realizar a busca?");
 
@@ -244,7 +250,8 @@ public class Menu {
 
 	}
 
-	private void toListBookByLanguageOption() {
+	@Transactional
+	public void toListBookByLanguageOption() {
 
 		String languageOptions = """
 				Use o número do idioma corresponte:
@@ -287,7 +294,8 @@ public class Menu {
 
 	}
 
-	private void toListBookByLanguage(String lan) {
+	@Transactional
+	public void toListBookByLanguage(String lan) {
 
 		List<Book> bookList = register.getBookRepository().findByLanguagesLanguage(lan);
 

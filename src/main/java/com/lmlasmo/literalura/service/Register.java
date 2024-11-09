@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lmlasmo.literalura.dto.AuthorDTO;
 import com.lmlasmo.literalura.dto.BookDTO;
@@ -34,6 +35,7 @@ public class Register {
 
 	}
 	
+	@Transactional
 	public Book registeBook(BookDTO dto) {
 		
 		Optional<Book> bookRegisted = bookRepository.findByTitle(dto.getTitle());
@@ -53,6 +55,7 @@ public class Register {
 		
 	}
 	
+	@Transactional
 	public Set<Language> registerLanguage(BookDTO dto) {				
 		
 		Set<Language> languages = dto.getLanguages().stream()							  
@@ -63,6 +66,7 @@ public class Register {
 		
 	}
 	
+	@Transactional
 	public Language registerLanguage(String language) {				
 		
 		Language languageP = verifyNewLanguage(language);
@@ -72,6 +76,7 @@ public class Register {
 		
 	}
 	
+	@Transactional
 	public Set<Author> registerAuthor(BookDTO dto) {
 		
 		Set<Author> authors = dto.getAuthors()
@@ -83,6 +88,7 @@ public class Register {
 		
 	}
 	
+	@Transactional
 	public Author registerAuthor(AuthorDTO dto) {
 		
 		Author author = verifyNewAuthor(dto);
@@ -91,7 +97,7 @@ public class Register {
 		return author;
 		
 	}
-	
+		
 	private Language verifyNewLanguage(String language) {
 		
 		Optional<Language> registedLanguage = languageRepository.findByLanguage(language);
@@ -102,7 +108,7 @@ public class Register {
 		return new Language(language);
 		
 	}
-	
+		
 	private Author verifyNewAuthor(AuthorDTO dto) {
 		
 		Optional<Author> registedAuthor = authorRepository.findByName(dto.getName());
@@ -114,22 +120,27 @@ public class Register {
 		
 	}
 	
+	@Transactional
 	public List<Book> getAllBooks(){
 		return bookRepository.findAll();
 	}
 	
+	@Transactional
 	public List<Author> getAllAuthors(){
 		return authorRepository.findAll();
 	}
 
+	@Transactional
 	public BookRepository getBookRepository() {
 		return bookRepository;
 	}
 
+	@Transactional
 	public AuthorRepository getAuthorRepository() {
 		return authorRepository;
 	}
 
+	@Transactional
 	public LanguageRepository getLanguageRepository() {
 		return languageRepository;
 	}	
