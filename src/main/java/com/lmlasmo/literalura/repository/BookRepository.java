@@ -13,6 +13,6 @@ public interface BookRepository extends JpaRepository<Book, Long>{
 	
 	public List<Book> findByAuthorsName(String name);
 	
-	public List<Book> findByLanguagesContains(String language);
+	public List<Book> findByLanguagesLanguage(String language);
 
 }
