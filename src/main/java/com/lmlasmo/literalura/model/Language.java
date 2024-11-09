@@ -23,14 +23,14 @@ public class Language {
 	@Column(name = "language", unique = true)
 	private String language;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "languages")
 	private Set<Book> books = new HashSet<Book>();
 
 	public Language() {
 	}
 
 	public Language(String language) {
-
+		this.language = language;
 	}
 
 	public long getId() {

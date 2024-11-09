@@ -45,7 +45,7 @@ public class Register {
 			book.setAuthors(registerAuthor(dto));
 			book.setLanguages(registerLanguage(dto));	
 			
-			return book;
+			return bookRepository.save(book);
 
 		}else {
 			return bookRegisted.get();
