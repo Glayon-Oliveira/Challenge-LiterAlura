@@ -15,15 +15,46 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "languages")
 public class Language {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Column(name = "language", unique = true)
 	private String language;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Book> books = new HashSet<Book>();
+
+	public Language() {
+	}
+
+	public Language(String language) {
+
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}	
 
 }
