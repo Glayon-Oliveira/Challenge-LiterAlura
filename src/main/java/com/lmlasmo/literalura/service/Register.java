@@ -59,7 +59,7 @@ public class Register {
 	public Set<Language> registerLanguage(BookDTO dto) {				
 		
 		Set<Language> languages = dto.getLanguages().stream()							  
-	  		     .map(l -> verifyNewLanguage(l))
+	  		     .map(l -> registerLanguage(l))
 	  		     .collect(Collectors.toSet());
 		
 		return languages;
